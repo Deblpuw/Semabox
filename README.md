@@ -6,7 +6,7 @@ user semabox -> /user/semaos/semaos.sh
 user root -> default
 
 Dépendances : 
-dialog nmap
+dialog nmap curl
 
-cronjob healthcheck
+cronjob healthcheck :
 */5 * * * * python3 /user/semaos/net-hc.py
