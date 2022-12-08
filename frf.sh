@@ -56,8 +56,8 @@ while true; do
       display_result "Scan du réseau"
       ;;
     4 )
-      result=$(less log)
-      display_result "Log de la santé de la connexion"
+      result=$(less ./outputs/logs.txt)
+      display_result "Santé de la connexion"
       ;;
     5 )
       result=$(speedtest.cli)

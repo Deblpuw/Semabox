@@ -5,5 +5,8 @@ Interface semi-graphique, fonctionne depuis le terminal
 user semabox -> /user/semaos/semaos.sh
 user root -> default
 
+Dépendances : 
+dialog nmap
+
 cronjob healthcheck
 */5 * * * * python3 /user/semaos/net-hc.py
