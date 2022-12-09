@@ -60,7 +60,8 @@ while true; do
       display_result "Santé de la connexion"
       ;;
     5 )
-      result=$(speedtest.cli)
+      $(fast -u > debit.txt)
+      result=$(tail -n 3 debit.txt)
       display_result "Speedtest"
   esac
 done
