@@ -71,7 +71,7 @@ while true; do
       display_result "Version"
       ;;
     7 ) 
-      result=$(git pull origin main)
+      result=$(git stash && git pull origin main)
       display_result "Mise à jour"
   esac
 done
