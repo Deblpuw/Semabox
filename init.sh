@@ -1,4 +1,4 @@
-apt update && install dialog nmap curl chromium shellinabox nodejs 
+apt update && apt install dialog nmap curl chromium shellinabox nodejs 
 curl -sL https://deb.nodesource.com/setup_16.x | bash -
 npm install --global fast-cli
 mkdir outputs
