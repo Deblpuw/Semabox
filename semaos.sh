@@ -66,7 +66,8 @@ while true; do
       display_result "Speedtest"
       ;;
     6 )
-      $(git log -1)
+      result=$(git log -1)
+      display_result "Version"
   esac
 done
 # $(ip route | grep src | grep eth0 | awk '{print $1}' > tmp)
