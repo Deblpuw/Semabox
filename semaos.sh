@@ -56,7 +56,7 @@ while true; do
       display_result "Scan du réseau"
       ;;
     4 )
-      result=$(less ./outputs/logs.txt)
+      result=$(less ./networkinfo.log)
       display_result "Santé de la connexion"
       ;;
     5 )
