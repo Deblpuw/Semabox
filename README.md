@@ -6,4 +6,6 @@ compte utilisateur -> semabox
 
 git clone https://github.com/Teth-IO/Semabox
 cd Semabox
-./init.sh (à lancer en root)
+modifier les acl pour autoriser les l'execution des scritps 
+Installer avec ./init.sh (à lancer en root)
+Accéder à SemaOS avec ./semaos.sh
