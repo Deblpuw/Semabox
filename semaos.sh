@@ -26,6 +26,7 @@ while true; do
     "3" "Scan de réseau" \
     "4" "Test de connexion" \
     "5" "Test de débit" \
+    "6" "Version" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -63,6 +64,9 @@ while true; do
       $(fast -u > debit.txt)
       result=$(tail -n 3 debit.txt)
       display_result "Speedtest"
+      ;;
+    6 )
+      $(git log -1)
   esac
 done
 # $(ip route | grep src | grep eth0 | awk '{print $1}' > tmp)
