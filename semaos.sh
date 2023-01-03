@@ -67,7 +67,7 @@ while true; do
       display_result "Speedtest"
       ;;
     6 )
-      result=$(git log --no-walk --tags --pretty="%h %d %s" --decorate=full)
+      result=$(git log -1)
       display_result "Version"
       ;;
     7 ) 
