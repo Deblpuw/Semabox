@@ -27,6 +27,7 @@ while true; do
     "4" "Test de connexion" \
     "5" "Test de débit" \
     "6" "Version" \
+    "7" "Mise à jour" \
     2>&1 1>&3)
   exit_status=$?
   exec 3>&-
@@ -68,6 +69,10 @@ while true; do
     6 )
       result=$(git log --no-walk --tags --pretty="%h %d %s" --decorate=full)
       display_result "Version"
+      ;;
+    7 ) 
+      result=$(git pull origin main)
+      display_result "Mise à jour"
   esac
 done
 # $(ip route | grep src | grep eth0 | awk '{print $1}' > tmp)
