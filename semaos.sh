@@ -66,7 +66,7 @@ while true; do
       display_result "Speedtest"
       ;;
     6 )
-      result=$(git log -1)
+      result=$(git log --no-walk --tags --pretty="%h %d %s" --decorate=full)
       display_result "Version"
   esac
 done
