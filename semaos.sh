@@ -49,7 +49,7 @@ while true; do
       display_result "Détail par interfaces"
       ;;
     2 )
-      result=$(curl wtfismyip.com/json)
+      result=$(curl ifconfig.me)
       display_result "IP Publique"
       ;;
     3 )
