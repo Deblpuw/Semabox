@@ -1,4 +1,4 @@
-mport dialog
+import dialog
 import subprocess
 
 
@@ -26,29 +26,31 @@ def action_2():
 
 
 def action_3():
-    command_result = execute_command(["ip"," route", "|", "grep", "src", "|", "grep", "eth0", "|", "awk", "'{print $1}'", ">", "tmp"], stdout=subprocess.PIPE)
+    command_result = execute_command(["ip","route", "|", "grep", "src", "|", "grep", "eth0", "|", "awk", "'{print $1}'", ">", "tmp"])
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result, height=80, width=80)
+    d.msgbox(text=command_result)
 
 def action_4():
-    command_result = execute_command(["ip", "a"])
-    d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result, height=80, width=80)
-    
-def action_5():
-    command_result = execute_command(["ip", "a"])
+    command_result = execute_command(["less", "./networkinfo.log"])
     d = dialog.Dialog(dialog="dialog")
     d.msgbox(text=command_result, height=80, width=80)
 
+def action_5():
+    command_result = execute_command(["fast", "-u", ">", "debit.txt"])
+    result = execute_command(["tail", "-n", "3", "debit.txt"])
+    d = dialog.Dialog(dialog="dialog")
+    d.msgbox(text=result)
+
 def action_6():
-    command_result = execute_command(["ip", "a"])
+    command_result = execute_command(["git", "log", "-1"])
     d = dialog.Dialog(dialog="dialog")
     d.msgbox(text=command_result, height=80, width=80)
 
 def action_7():
-    command_result = execute_command(["ip", "a"])
+    command_result = execute_command(["git", "stash", "&&", "git", "pull", "origin", "main"])
     d = dialog.Dialog(dialog="dialog")
     d.msgbox(text=command_result, height=80, width=80)
+
 
 actions = {"1": action_1,
            "2": action_2,
@@ -73,4 +75,3 @@ code, tag = d.menu("Selectionnez une action",
 
 if code == d.OK:
     actions[tag]()
-
