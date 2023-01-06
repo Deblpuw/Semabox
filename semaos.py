@@ -34,6 +34,21 @@ def action_4():
     command_result = execute_command(["ip", "a"])
     d = dialog.Dialog(dialog="dialog")
     d.msgbox(text=command_result, height=80, width=80)
+    
+def action_5():
+    command_result = execute_command(["ip", "a"])
+    d = dialog.Dialog(dialog="dialog")
+    d.msgbox(text=command_result, height=80, width=80)
+
+def action_6():
+    command_result = execute_command(["ip", "a"])
+    d = dialog.Dialog(dialog="dialog")
+    d.msgbox(text=command_result, height=80, width=80)
+
+def action_7():
+    command_result = execute_command(["ip", "a"])
+    d = dialog.Dialog(dialog="dialog")
+    d.msgbox(text=command_result, height=80, width=80)
 
 actions = {"1": action_1,
            "2": action_2,
