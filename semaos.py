@@ -1,27 +1,41 @@
-import dialog
 
+import dialog
 import subprocess
 
-
-#def action_1():
-#    result = subprocess.run(["ip a"], stdout=subprocess.PIPE)
-#    d = dialog.Dialog(dialog="dialog")
-#    d.programbox("Resultat", result.stdout.decode())
-    
 def execute_command(command):
-   result = subprocess.run(command, stdout=subprocess.PIPE)
-   return result.stdout.decode()
-   
-#def action_3():
-#    print("Option 3 sélectionnée. Exécution de l'action correspondante.")
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if result.returncode == 0:
+        # La commande s'est exécutée avec succès
+        output = result.stdout.decode()
+    else:
+        # La commande a échoué
+        output = result.stderr.decode()
+    return output
 
-#actions = {"1": action_1,
-#           "2": action_2,
-#           "3": action_3}
+def action_1():
+    command_result = execute_command(["ip", "a","|","grep" ,l])
+    d = dialog.Dialog(dialog="dialog")
+    d.programbox(command_result)
+
+def action_2():
+    result = subprocess.run(["curl", "ifconfig.me"],stdout=subprocess.PIPE)
+    d = dialog.Dialog(dialog="dialog")
+    d.programbox(result.stdout.decode())
+
+def action_3():
+    result = subprocess.run(["ip"," route", "|", "grep", "src", "|", "grep", "eth0", "|", "awk", "'{print $1}'", ">", "tmp"], stdout=subprocess.PIPE)
+    d = dialog.Dialog(dialog="dialog")
+    d.programbox("Resultat", result.stdout.decode())
+
+
+
+actions = {"1": action_1,
+           "2": action_2,
+           "3": action_3}
 
 d = dialog.Dialog(dialog="dialog")
 
-code, tag = d.menu("Selectionnez une action", 
+code, tag = d.menu("Selectionnez une action",
                    choices=[("1", "Mon IP Privé"),
                             ("2", "Mon IP Publique"),
                             ("3", "Scan de Réseau"),
@@ -29,17 +43,9 @@ code, tag = d.menu("Selectionnez une action",
                             ("5", "Test de débit"),
                             ("6", "Version"),
                             ("7", "Mise a jour")],
-                   
-                   
-                    title="Bienvenu sur SemaOS")
+
+                   title="Bienvenu sur SemaOS")
 
 if code == d.OK:
-#    actions[tag]()
-    if tag == "1":
-        command_result = execute_command(["ip", "a"])
-        d.programbox(command_result, "Resultat")
-
-    elif tag == "2":
-        command_result = execute_command(["curl", "ifconfig.me"])
-        d.programbox(command_result, "Resultat")
+    actions[tag]()
 
