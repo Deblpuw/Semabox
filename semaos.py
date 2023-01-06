@@ -19,7 +19,7 @@ def execute_command(command):
 def action_1():
     command_result = execute_command(["ip", "a"])
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result, height=80, width=80)
+    d.msgbox(text=command_result)
 
 
 def action_2():
@@ -57,7 +57,7 @@ def action_2():
 def action_4():
     command_result = execute_command(["less", "./networkinfo.log"])
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result, height=80, width=80)
+    d.msgbox(text=command_result)
 
 def action_5():
     command_result = execute_command(["fast", "-u", ">", "debit.txt"])
@@ -68,12 +68,12 @@ def action_5():
 def action_6():
     command_result = execute_command(["git", "log", "-1"])
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result, height=80, width=80)
+    d.msgbox(text=command_result)
 
 def action_7():
     command_result = execute_command(["git", "stash", "&&", "git", "pull", "origin", "main"])
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result, height=80, width=80)
+    d.msgbox(text=command_result)
 
 
 actions = {"1": action_1,
