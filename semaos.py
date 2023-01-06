@@ -1,9 +1,10 @@
-
-import dialog
+mport dialog
 import subprocess
+
 
 def execute_command(command):
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
     if result.returncode == 0:
         # La commande s'est exécutée avec succès
         output = result.stdout.decode()
@@ -13,21 +14,26 @@ def execute_command(command):
     return output
 
 def action_1():
-    command_result = execute_command(["ip", "a","|","grep" ,l])
+    command_result = execute_command(["ip", "a"])
     d = dialog.Dialog(dialog="dialog")
-    d.programbox(command_result)
+    d.msgbox(text=command_result, height=80, width=80)
+
 
 def action_2():
-    result = subprocess.run(["curl", "ifconfig.me"],stdout=subprocess.PIPE)
+    command_result = execute_command(["curl", "ifconfig.me"])
     d = dialog.Dialog(dialog="dialog")
-    d.programbox(result.stdout.decode())
+    d.msgbox(text=command_result)
+
 
 def action_3():
-    result = subprocess.run(["ip"," route", "|", "grep", "src", "|", "grep", "eth0", "|", "awk", "'{print $1}'", ">", "tmp"], stdout=subprocess.PIPE)
+    command_result = execute_command(["ip"," route", "|", "grep", "src", "|", "grep", "eth0", "|", "awk", "'{print $1}'", ">", "tmp"], stdout=subprocess.PIPE)
     d = dialog.Dialog(dialog="dialog")
-    d.programbox("Resultat", result.stdout.decode())
+    d.msgbox(text=command_result, height=80, width=80)
 
-
+def action_4():
+    command_result = execute_command(["ip", "a"])
+    d = dialog.Dialog(dialog="dialog")
+    d.msgbox(text=command_result, height=80, width=80)
 
 actions = {"1": action_1,
            "2": action_2,
