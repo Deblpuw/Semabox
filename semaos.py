@@ -13,13 +13,13 @@ def execute_command(command):
         output = result.stderr.decode()
     return output
 
-
-
-
 def action_1():
-    command_result = execute_command(["ip", "a"])
+    process1 = subprocess.Popen(["ip", "a"], stdout=subprocess.PIPE)
+    process2 = subprocess.Popen(["grep", "inet"], stdin=process1.stdout, stdout=subprocess.PIPE)
+    process1.stdout.close()  # ferme le descripteur de sortie de process1
+    output, _ = process2.communicate()  # récupère la sortie de process2
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result)
+    d.msgbox(text=output.decode())
 
 
 def action_2():
@@ -27,32 +27,28 @@ def action_2():
     d = dialog.Dialog(dialog="dialog")
     d.msgbox(text=command_result)
 
-#def action_3():
-#    command_result = execute_command(["ip", "route", "|", "grep", "src", "|", "awk", "'{print $1}'", "|", "tee", "tmp"])
-#    process1 = subprocess.Popen(["ip", "route"], stdout=subprocess.PIPE)
-#    process2 = subprocess.Popen(["grep", "src"], stdin=process1.stdout, stdout=subprocess.PIPE)
-#    process3 = subprocess.Popen(["awk", "'{print $1}'"], stdin=process2.stdout, stdout=subprocess.PIPE)
-#    process4 = subprocess.Popen(["tee", "tmp"], stdin=process3.stdout, stdout=subprocess.PIPE)
+def action_3():
+    process1 = subprocess.Popen(["ip", "route"], stdout=subprocess.PIPE)
+    process2 = subprocess.Popen(["grep", "src"], stdin=process1.stdout, stdout=subprocess.PIPE)
+    process3 = subprocess.Popen(["awk", "{print $1}"], stdin=process2.stdout, stdout=subprocess.PIPE)
 
-#    process4.wait()
-#    output = process4.stdout.decode()
-#    print(output)
-#with open("tmp", "w") as f:
-#    f.write(output.decode())
-    
+    process4 = subprocess.Popen(["tee", "tmp"], stdin=process3.stdout, stdout=subprocess.PIPE)
+    process4.wait()
+    output = process4.communicate()[0].decode()
+    with open("tmp", "w") as f:
+        f.write(output)
 
-#    commands_result = execute_command(["nmap", "-sn", "-iL", "tmp"])
-#    result = execute_command(["cat", "tmps"])
-#    d = dialog.Dialog(dialog="dialog")
-#    d.msgbox(text=result)
+    process5 = subprocess.Popen(["nmap", "-sn", "-iL", "tmp"], stdout=subprocess.PIPE)
+    process6 = subprocess.CompletedProcess(["tee", "tmps"], stdin=process5.stdout, stdout=subprocess.PIPE)
 
+    process6.wait()
+    output = process6.stdout.decode()
+    with open("tmps", "w") as f:
+        f.write(output)
 
-#def action_3():
-#    command_result = execute_command(["ip", "route", "|", "grep", "src", "|", "awk", "'{print $1}'>", "tmp"])
-#    command_result = subprocess.run(["nmap", "-sn", "-iL", "tmp"],stdout=subprocess.PIPE, input=command_result.stdout )
-#    result = command_result.stdout.decode()
-#    d = dialog.Dialog(dialog="dialog")
-#    d.msgbox(text=result)
+    result = execute_command(["cat", "tmps"])
+    d = dialog.Dialog(dialog="dialog")
+    d.msgbox(text=result)
 
 def action_4():
     command_result = execute_command(["less", "./networkinfo.log"])
