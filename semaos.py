@@ -52,7 +52,11 @@ def action_7():
 
 actions = {"1": action_1,
            "2": action_2,
-           "3": action_3}
+           "3": action_3,
+           "4": action_4,
+           "5": action_5,
+           "6": action_6,
+           "7": action_7}
 
 d = dialog.Dialog(dialog="dialog")
 
