@@ -14,12 +14,14 @@ def execute_command(command):
     return output
 
 def action_1():
-    process1 = subprocess.Popen(["ip", "a"], stdout=subprocess.PIPE)
-    process2 = subprocess.Popen(["grep", "inet"], stdin=process1.stdout, stdout=subprocess.PIPE)
-    process1.stdout.close()  # ferme le descripteur de sortie de process1
-    output, _ = process2.communicate()  # récupère la sortie de process2
+    interfaces = netifaces.interfaces()
+    for i in interfaces:
+        iface_data = netifaces.ifaddresses(i)
+        if netifaces.AF_INET in iface_data:
+            ip_address = iface_data[netifaces.AF_INET][0]['addr']
+            ip = f"Adresse IP de l'interface {i}: {ip_address}"    
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=output.decode())
+    d.msgbox(text=ip)
 
 
 def action_2():
