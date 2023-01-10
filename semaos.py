@@ -1,6 +1,7 @@
 import dialog
 import subprocess
 import netifaces
+import pycurl
 
 def execute_command(command):
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -41,10 +42,10 @@ def action_3():
         f.write(output)
 
     process5 = subprocess.Popen(["nmap", "-sn", "-iL", "tmp"], stdout=subprocess.PIPE)
-    process6 = subprocess.CompletedProcess(["tee", "tmps"], stdin=process5.stdout, stdout=subprocess.PIPE)
-
+    process6 = subprocess.Popen(["tee", "tmps"], stdin=process5.stdout, stdout=subprocess.PIPE)
     process6.wait()
-    output = process6.stdout.decode()
+    stdout, stderr = process6.communicate()
+    output = stdout.decode()
     with open("tmps", "w") as f:
         f.write(output)
 
