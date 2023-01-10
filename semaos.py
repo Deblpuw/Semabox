@@ -51,7 +51,7 @@ def action_3():
 
     result = execute_command(["cat", "tmps"])
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=result)
+    d.msgbox(text=result, width=90)
 
 def action_4():
     command_result = execute_command(["less", "./networkinfo.log"])
