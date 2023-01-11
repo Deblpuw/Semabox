@@ -26,9 +26,17 @@ def action_1():
 
 
 def action_2():
-    command_result = execute_command(["curl", "ifconfig.me"])
+    
+    response_data = bytearray()
+    c = pycurl.Curl()
+    c.setopt(c.URL, "https://api.ipify.org")
+    c.setopt(c.WRITEFUNCTION, response_data.extend)
+    c.perform()
+    c.close()
     d = dialog.Dialog(dialog="dialog")
-    d.msgbox(text=command_result)
+    d.msgbox(text=response_data.decode())
+
+
 
 def action_3():
     process1 = subprocess.Popen(["ip", "route"], stdout=subprocess.PIPE)
